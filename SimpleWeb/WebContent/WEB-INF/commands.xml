@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<commands-list>
+	<command>
+		<command-name>change-locale</command-name>
+		<command-class>by.epam.simpleweb.command.impl.ChangeLocaleCommand</command-class>
+	</command>
+	<command>
+		<command-name>registration</command-name>
+		<command-class>by.epam.simpleweb.command.impl.RegistrationCommand</command-class>
+	</command>
+	<command>
+		<command-name>login</command-name>
+		<command-class>by.epam.simpleweb.command.impl.LoginCommand</command-class>
+	</command>
+	<command>
+		<command-name>unknown-command</command-name>
+		<command-class>by.epam.simpleweb.command.impl.UnknownCommand</command-class>
+	</command>
+</commands-list>
