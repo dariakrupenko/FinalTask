@@ -32,14 +32,14 @@
     </div>
     <ul>
       <li class="selected"><fmt:message key="i18n.button.edit_faculty" bundle="${i18n}" /></li>
-      <li><form action="Controller"  method="post">
+      <li><form action="Controller" method="post">
           <input type="hidden" name="command" value="get-register-by-status" />
           <input type="hidden" name="admitted" value="true" />
           <input type="hidden" name="faculty-id" value="${requestScope.faculty.id}" />
           <input type="submit"
             value="<fmt:message key="i18n.button.admitted_applicants" bundle="${i18n}" />" />
         </form></li>
-      <li><form action="Controller"  method="post">
+      <li><form action="Controller" method="post">
           <input type="hidden" name="command" value="get-register-by-status" />
           <input type="hidden" name="admitted" value="false" />
           <input type="hidden" name="faculty-id" value="${requestScope.faculty.id}" />
@@ -55,14 +55,15 @@
       <fmt:message key="i18n.info.admin.faculties.edit" bundle="${i18n}" />
     </p>
     <c:choose>
-    <c:when test="${empty requestScope.faculty}">
-        <p class="info-message">
-          <fmt:message key="i18n.error.faculty.not_found" bundle="${i18n}" />
-        </p>
-      </c:when>
+
       <c:when test="${requestScope.successDeleted}">
         <p class="success-message">
           <fmt:message key="i18n.success.admin.faculties.delete" bundle="${i18n}" />
+        </p>
+      </c:when>
+      <c:when test="${empty requestScope.faculty}">
+        <p class="info-message">
+          <fmt:message key="i18n.error.faculty.not_found" bundle="${i18n}" />
         </p>
       </c:when>
       <c:otherwise>
@@ -83,17 +84,17 @@
             </p>
           </c:if>
           <c:if test="${requestScope.alreadyExists}">
-        <p class="error-message">
-          <fmt:message key="i18n.error.admin.faculties.exist" bundle="${i18n}" />
-        </p>
-      </c:if>
+            <p class="error-message">
+              <fmt:message key="i18n.error.admin.faculties.exist" bundle="${i18n}" />
+            </p>
+          </c:if>
           <c:if test="${requestScope.successUpdated}">
             <p class="success-message">
               <fmt:message key="i18n.success.admin.faculties.update" bundle="${i18n}" />
             </p>
           </c:if>
         </div>
-        <form action="Controller"  method="post">
+        <form action="Controller" method="post">
           <input type="hidden" name="command" value="update-faculty" />
           <input type="hidden" name="faculty-id" value="${requestScope.faculty.id}" />
           <h3>

@@ -12,6 +12,7 @@
 	<loggers>
 		<root level="debug">
 			<appender-ref ref="STDOUT" />
+			<appender-ref ref="registration"/>
 		</root>
 		<logger name="main.by.epam.admissionweb.service.impl.ApplicantServiceImpl" level="info" additivity="false">
 			<appender-ref ref="registration"/>

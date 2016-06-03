@@ -38,16 +38,17 @@
       <fmt:message key="i18n.info.admin.disciplines.edit" bundle="${i18n}" />
     </p>
     <c:choose>
-      <c:when test="${empty requestScope.discipline}">
-        <p class="info-message">
-          <fmt:message key="i18n.error.admin.disciplines.not_found" bundle="${i18n}" />
-        </p>
-      </c:when>
       <c:when test="${requestScope.successDeleted}">
         <p class="success-message">
           <fmt:message key="i18n.success.admin.disciplines.delete" bundle="${i18n}" />
         </p>
       </c:when>
+      <c:when test="${empty requestScope.discipline}">
+        <p class="info-message">
+          <fmt:message key="i18n.error.admin.disciplines.not_found" bundle="${i18n}" />
+        </p>
+      </c:when>
+
       <c:otherwise>
         <c:if test="${requestScope.error}">
           <p class="error-message">

@@ -20,7 +20,7 @@
   <section class="main-panel">
     <div>
       <img src="img/icon/register_icon.png" alt="account icon" />
-      <form  method="post">
+      <form action="Controller" method="post">
         <input type="hidden" name="command" value="get-register">
         <input type="submit"
           value="<fmt:message key="i18n.head.register_review" bundle="${i18n}" />" class="title" />
