@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>AdmissionWeb</display-name>
+
+	<context-param>
+		<param-name>i18n</param-name>
+		<param-value>main.by.epam.admissionweb.i18n.i18n</param-value>
+	</context-param>
+	<context-param>
+		<param-name>commands-file</param-name>
+		<param-value>/WEB-INF/commands_config/commands.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>commands-file-schema</param-name>
+		<param-value>/WEB-INF/commands_config/commands.xsd</param-value>
+	</context-param>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<description></description>
+		<display-name>Controller</display-name>
+		<servlet-name>Controller</servlet-name>
+		<servlet-class>main.by.epam.admissionweb.controller.Controller</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Controller</servlet-name>
+		<url-pattern>/Controller</url-pattern>
+	</servlet-mapping>
+
+	<jsp-config>
+		<taglib>
+			<taglib-uri>/WEB-INF/tld/admissiontaglib.tld</taglib-uri>
+			<taglib-location>/WEB-INF/tld/admissiontaglib.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+
+	<filter>
+		<display-name>CharsetFilter</display-name>
+		<filter-name>CharsetFilter</filter-name>
+		<filter-class>main.by.epam.admissionweb.filter.CharsetFilter</filter-class>
+		<init-param>
+			<param-name>character-encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharsetFilter</filter-name>
+		<url-pattern>/Controller</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<display-name>DatabaseErrorFilter</display-name>
+		<filter-name>DatabaseErrorFilter</filter-name>
+		<filter-class>main.by.epam.admissionweb.filter.DatabaseErrorFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>DatabaseErrorFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- <filter> <display-name>RefreshProtectFilter</display-name> <filter-name>RefreshProtectFilter</filter-name> 
+		<filter-class>by.epam.admissionweb.filter.RefreshProtectFilter</filter-class> </filter> <filter-mapping> 
+		<filter-name>RefreshProtectFilter</filter-name> <url-pattern>/*</url-pattern> </filter-mapping> -->
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/error/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/error/500.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/WEB-INF/error/default.jsp</location>
+	</error-page>
+
+	<listener>
+		<listener-class>main.by.epam.admissionweb.listener.ProjectServletContextListener</listener-class>
+	</listener>
+
+
+
+</web-app>

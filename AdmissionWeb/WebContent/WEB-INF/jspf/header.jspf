@@ -1,0 +1,30 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<header>
+  <div class="id-panel-widget">
+    <c:if test="${!empty sessionScope.applicant}">
+      <div class="header-widget">
+        <fmt:message key="i18n.label.applicant" bundle="${i18n}" />
+        <br /> ${sessionScope.applicant.name}
+      </div>
+    </c:if>
+    <c:if test="${sessionScope.admin}">
+      <div class="header-widget">
+        <fmt:message key="i18n.label.admin_console" bundle="${i18n}" />
+      </div>
+    </c:if>
+  </div>
+  <div class="settings-panel-widget">
+    <a href="settings.jsp" class="header-widget"><fmt:message key="i18n.label.settings"
+        bundle="${i18n}" /></a>
+  </div>
+  <div class="header-title">
+    <p>
+      <fmt:message key="i18n.title.bsuir" bundle="${i18n}" />
+      <br /> <a href="index.jsp"><fmt:message key="i18n.title.admission" bundle="${i18n}" /></a>
+    </p>
+  </div>
+</header>

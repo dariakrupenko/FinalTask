@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.epam.by/admission"
+	xmlns:adm="http://www.epam.by/admission" elementFormDefault="unqualified">
+
+	<element name="commands-list">
+		<complexType>
+			<sequence>
+				<element name="command" type="adm:CommandType" minOccurs="0" maxOccurs="unbounded" />
+			</sequence>
+		</complexType>
+	</element>
+	
+	<complexType name="CommandType">
+		<sequence>
+			<element name="command-name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="command-class" type="string" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+</schema>

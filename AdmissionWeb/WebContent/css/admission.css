@@ -1,0 +1,450 @@
+/* general style */
+body {
+ background-image: url(../img/style/background.jpg);
+ font-family: Calibri, sans-serif;
+ color: #0d261a;
+}
+
+input {
+ font-family: Calibri, sans-serif;
+ font-size: 1em;
+}
+
+input[type="date"], input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+ width: 370px;
+}
+
+img {
+ float: left;
+ border: solid thin #194d33;
+ width: 100px;
+ height: 100px;
+}
+
+p, dd {
+ font-size: 1.05em;
+}
+
+h1 {
+ width: 60%;
+ font-size: 2.5em;
+ font-weight: lighter;
+ padding-left: 110px;
+}
+
+h3, dt {
+ color: #e6ffee;
+ font-size: medium;
+ font-weight: normal;
+ background: #66cc99;
+ padding: 10px;
+ margin-bottom: 0px;
+ width: 508px;
+ border: solid thin #339966;
+}
+
+dt {
+ width: 600px;
+}
+
+dd {
+ text-align: justify;
+ margin-top: 5px;
+ margin-bottom: 15px;
+ width: 582px;
+}
+
+select {
+ font-family: Calibri, sans-serif;
+ font-size: medium;
+ width: 150px;
+ height: 25px;
+}
+
+label {
+ font-weight: bold;
+ vertical-align: top;
+ width: 150px;
+}
+
+textarea {
+ resize: none;
+ width: 369px;
+ height: 120px;
+}
+
+/* links */
+a {
+ font-weight: bold;
+ color: #26734d;
+}
+
+a:hover {
+ color: #00b359;
+}
+
+/* header style */
+header {
+ width: 1000px;
+ height: 250px;
+ margin: 0 auto;
+ background-image: url(../img/style/header_background.jpg);
+ border: solid white thin;
+}
+
+.header-widget {
+ font-weight: bold;
+ background: transparent;
+ color: white;
+ border: solid white thin;
+ padding: 10px;
+ margin-right: 1px;
+ text-align: center;
+}
+
+.id-panel-widget .header-widget {
+ float: left;
+ margin: 20px;
+}
+
+.settings-panel-widget .header-widget {
+ float: right;
+ width: 100px;
+ margin: 20px;
+ text-decoration: none;
+}
+
+.settings-panel-widget .header-widget:hover {
+ background: white;
+ color: #194d33;
+}
+
+.header-title {
+ font-size: 2em;
+ text-align: right;
+ color: white;
+ float: right;
+ margin-top: 60px;
+ margin-right: -140px;
+}
+
+.header-title a {
+ font-size: 0.6em;
+ font-weight: normal;
+ color: white;
+ text-decoration: none;
+}
+
+.header-title a:hover {
+ color: #4dff88;
+}
+
+/* footer style */
+footer {
+ width: 1000px;
+ margin: 0 auto;
+ background: #1f6040;
+ border: solid white thin;
+ height: 100px;
+ padding-top: 10px;
+}
+
+footer p {
+ color: #e6ffee;
+ padding-left: 50px;
+ font-size: small;
+}
+
+/* main content style */
+main {
+ width: 1000px;
+ margin: 0 auto;
+ border: solid thin white;
+ background: url(../img/style/main_background.jpg);
+}
+
+section {
+ background: url(../img/style/section_background.jpg);
+ margin: 50px auto;
+ width: 800px;
+ border: solid medium #339966;
+ padding: 50px;
+}
+
+/* buttons */
+.button {
+ display: inline-block;
+ width: 150px;
+ border: solid thin #339966;
+ text-decoration: none;
+ padding: 10px;
+ background: #339966;
+ color: #e6ffee;
+ margin-top: 20px;
+ font-weight: normal;
+}
+
+.button:hover {
+ background: #00cc66;
+ color: #e6ffee;
+ font-weight: normal;
+}
+
+/* forms */
+.form-box {
+ display: table;
+ border-spacing: 5px;
+ margin-left: -5px;
+}
+
+.form-box>div {
+ display: table-row;
+}
+
+.form-box>div>* {
+ display: table-cell;
+}
+
+/* long list pages navigation */
+.control-panel {
+ height: 40px;
+ margin: 20px 0px;
+}
+
+.control-panel * {
+ float: left;
+}
+
+.control-panel .button, .table-button {
+ border: none;
+ background: #66cc99;
+ margin-top: 0px;
+ width: 100px;
+ padding: 5px 15px;
+}
+
+
+
+.control-panel .button:hover{
+ border: solid thin #339966;
+}
+
+.control-panel span {
+ padding: 6px 15px 0px 15px;
+}
+
+.clearfix:after {
+ content: "";
+ display: block;
+ clear: both;
+}
+
+/* control menu style */
+ul {
+ width: 100%;
+ padding-left: 0px;
+ margin: 30px 0px 40px 0px;
+ color: #e6ffee;
+ font-size: 1.1em;
+}
+
+ul li {
+ margin-right: -2px;
+ padding: 10px 0px;
+ text-align: center;
+ list-style: none;
+ display: inline-block;
+ width: 50%;
+ /*width: 348px;*/
+ background: #00cccc;
+}
+
+ul li:not(.selected ):hover {
+ background: #00e6e6;
+}
+
+.selected {
+ background: #009999;
+}
+
+ul li a {
+ text-decoration: none;
+ color: #e6ffee;
+ font-weight: normal;
+}
+
+ul li a:hover {
+ color: #e6ffee;
+}
+
+ul input {
+ background: transparent;
+ border: none;
+ color: #e6ffee;
+ padding: 0px;
+}
+
+/* tables style */
+table {
+ border-collapse: collapse;
+ width: 100%;
+}
+
+thead {
+ text-align: center;
+ font-weight: bold;
+ background: #29a3a3;
+ color: #e6ffee;
+}
+
+tbody {
+ background: #b3fff0;
+}
+
+tbody tr:hover {
+ background: #66cc99;
+}
+
+td {
+ border: solid thin #003333;
+ padding: 5px;
+}
+
+.center {
+ text-align: center;
+}
+
+table input {
+ background: transparent;
+ border: none;
+}
+
+/* messages */
+.success-message {
+ font-weight: bold;
+ font-style: italic;
+ color: green;
+}
+
+.error-message {
+ font-weight: bold;
+ font-style: italic;
+ color: red;
+}
+
+.info-message {
+ font-weight: bold;
+ font-style: italic;
+}
+
+.validate-message {
+ font-size: small;
+ font-style: italic;
+ font-weight: normal;
+}
+
+/* INDEX.JSP - main (index) page */
+.main-panel>div {
+ /*width: 80%;*/
+ height: 100px;
+ padding: 10px 50px;
+ margin: 15px 30px;
+}
+
+.main-panel>div:hover {
+ background: #66ff99;
+ border-left: solid 10px #339966;
+ padding-left: 40px;
+}
+
+.main-panel input:not(.button) {
+ border: none;
+ background: transparent;
+ margin: 0px;
+}
+
+.main-panel .link-button {
+ font-weight: normal;
+ color: #0d261a;
+ text-decoration: none;
+ margin: 0px 6px;
+}
+
+.main-panel .title {
+ font-size: 2em;
+}
+
+.main-panel p {
+ padding: 0px;
+ margin: 0px 25px 0px 110px;
+}
+
+.main-panel .button {
+ margin-left: 80px;
+ text-align: center;
+ width: 250px;
+}
+
+
+/* SETTINGS.JSP - settings page */
+.settings-panel label, .disciplines-panel label {
+ width: 215px;
+}
+
+/* FACULTIES_LIST.JSP - faculties list page shown for the user/abiturient */
+.faculty-logo {
+ width: 70px;
+ height: 70px;
+}
+
+.faculties-list>div {
+ border-top: solid thin #66cc99;
+ height: 73px;
+ border-left: solid #66cc99 8px;
+ padding: 0px 0px;
+}
+
+.faculties-list>div:hover {
+ background: #66ff99;
+}
+
+.faculties-list .title {
+ border: none;
+ background: transparent;
+ margin: 0px;
+ font-size: 1.5em;
+}
+
+/* abiturient account style */
+.account-panel .button {
+ width: 100px;
+}
+
+/* faculties editing for admin */
+.add-fac-panel .button {
+ width: 100px;
+}
+
+.edit-fac-panel li, .applicants-rate-panel li {
+ width: 33%;
+}
+
+/* abiturients editing for admin */
+.applicants-panel tbody {
+ font-size: small;
+}
+
+
+.error-panel h2 {
+  padding-left: 110px;
+}
+
+.admin {
+ text-align: center;
+ width: 50%;
+}
+
+
+.wide-button {
+ width: 200px;
+}

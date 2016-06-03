@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration monitorInterval="3">
+	<appenders>
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{ABSOLUTE} [%-5p] - %m%n" />
+		</Console>
+		<File name="registration" fileName="registration.log">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%4p] - %m%n" />
+		</File>
+	</appenders>
+	<loggers>
+		<root level="debug">
+			<appender-ref ref="STDOUT" />
+		</root>
+		<logger name="main.by.epam.admissionweb.service.impl.ApplicantServiceImpl" level="info" additivity="false">
+			<appender-ref ref="registration"/>
+		</logger>
+	</loggers>
+</configuration>
