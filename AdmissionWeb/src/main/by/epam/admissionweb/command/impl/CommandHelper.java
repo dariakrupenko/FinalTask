@@ -663,6 +663,7 @@ public class CommandHelper {
 		public static final String FACULTY_KEY = "facultyKey";
 		public static final String RECORD_KEY = "recordKey";
 		public static final String APPLICANT_KEY = "applicantKey";
+		public static final String NOT_FOUND = "notFound";
 
 	}
 

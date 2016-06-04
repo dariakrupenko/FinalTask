@@ -76,7 +76,11 @@ public class GetApplicantCommand implements Command {
 			try {
 				LOGGER.debug("COMMAND : GetApplicantCommand (id = {})", id);
 				Applicant a = service.getApplicant(id);
-				request.setAttribute(CommandHelper.AttributeName.APPLICANT_TO_REQUEST, a);
+				if (a == null) {
+					request.setAttribute(CommandHelper.AttributeName.NOT_FOUND, true);
+				} else {
+					request.setAttribute(CommandHelper.AttributeName.APPLICANT_TO_REQUEST, a);
+				}
 			} catch (ServiceException ex) {
 				LOGGER.error(ex);
 				request.setAttribute(CommandHelper.AttributeName.ERROR, true);

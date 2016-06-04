@@ -42,7 +42,8 @@ public class GetFacultyCommand implements Command {
 	 * информации о факультете.
 	 * <p>
 	 * Для получения списка метод обращается к сервису {@link FacultyService}. В
-	 * результате работы метод устанавливает в контекст запроса объект факультета.
+	 * результате работы метод устанавливает в контекст запроса объект
+	 * факультета.
 	 * <p>
 	 * В зависимости от того, является ли клиент администратором, запрос
 	 * перенаправляется на соответствующую страницу.
@@ -72,11 +73,16 @@ public class GetFacultyCommand implements Command {
 		FacultyService service = ServiceFactory.getInstance().getFacultyService();
 		try {
 			Faculty f = service.getFaculty(id);
-			request.setAttribute(CommandHelper.AttributeName.FACULTY, f);
-			DisciplineService dService = ServiceFactory.getInstance().getDisciplineService();
-			List<Discipline> list = dService.getDisciplinesList(CommandHelper.REQUIRED_PAGE_DEFAULT,
-					CommandHelper.ELEMENTS_MAX_VALUE);
-			request.setAttribute(CommandHelper.AttributeName.D_LIST, list);
+			if (f == null) {
+				request.setAttribute(CommandHelper.AttributeName.NOT_FOUND, true);
+			} else {
+				request.setAttribute(CommandHelper.AttributeName.FACULTY, f);
+
+				DisciplineService dService = ServiceFactory.getInstance().getDisciplineService();
+				List<Discipline> list = dService.getDisciplinesList(CommandHelper.REQUIRED_PAGE_DEFAULT,
+						CommandHelper.ELEMENTS_MAX_VALUE);
+				request.setAttribute(CommandHelper.AttributeName.D_LIST, list);
+			}
 		} catch (ServiceException ex) {
 			LOGGER.error(ex);
 			request.setAttribute(CommandHelper.AttributeName.ERROR, true);

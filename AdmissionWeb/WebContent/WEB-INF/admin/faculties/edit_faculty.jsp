@@ -61,7 +61,7 @@
           <fmt:message key="i18n.success.admin.faculties.delete" bundle="${i18n}" />
         </p>
       </c:when>
-      <c:when test="${empty requestScope.faculty}">
+      <c:when test="${requestScope.notFound}">
         <p class="info-message">
           <fmt:message key="i18n.error.faculty.not_found" bundle="${i18n}" />
         </p>

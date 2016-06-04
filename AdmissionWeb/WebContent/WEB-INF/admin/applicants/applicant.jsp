@@ -36,7 +36,7 @@
           <fmt:message key="i18n.error.admin.applicants.review" bundle="${i18n}" />
         </p>
       </c:when>
-      <c:when test="${empty requestScope.appl}">
+      <c:when test="${requestScope.notFound}">
         <p class="info-message">
           <fmt:message key="i18n.info.admin.applicants.review_empty" bundle="${i18n}" />
         </p>

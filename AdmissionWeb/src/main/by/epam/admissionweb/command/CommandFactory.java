@@ -40,7 +40,7 @@ public class CommandFactory {
 	 * объект фабрики можно получить, вызвав статический метод
 	 * <code>getInstance()</code> данного класса.
 	 */
-	private static final CommandFactory instance = new CommandFactory();
+	private static final CommandFactory INSTANCE = new CommandFactory();
 
 	/**
 	 * Конструктор для создания объекта фабрики. Может быть вызван только из
@@ -56,7 +56,7 @@ public class CommandFactory {
 	 * @return объект фабрики для получения команд
 	 */
 	public static final CommandFactory getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 
 	/**

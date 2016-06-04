@@ -75,7 +75,11 @@ public class GetDisciplineCommand implements Command {
 			DisciplineService service = ServiceFactory.getInstance().getDisciplineService();
 			try {
 				Discipline d = service.getDiscipline(id);
-				request.setAttribute(CommandHelper.AttributeName.DISCIPLINE, d);
+				if (d == null) {
+					request.setAttribute(CommandHelper.AttributeName.NOT_FOUND, true);
+				} else {
+					request.setAttribute(CommandHelper.AttributeName.DISCIPLINE, d);
+				}
 			} catch (ServiceException ex) {
 				LOGGER.error(ex);
 				request.setAttribute(CommandHelper.AttributeName.ERROR, true);
