@@ -729,15 +729,22 @@ public class RegisterDAOdb implements RegisterDAO {
 	 */
 	@Override
 	public void rollbackTransaction(int trCode) throws TransactionException {
+		Connection conn = null;
 		try {
-			Connection conn = TR_MAP.get(trCode);
+			conn = TR_MAP.get(trCode);
 			conn.rollback();
 			TR_MAP.remove(trCode);
 			LOGGER.debug("DAO : transaction rollback; transaction code = {}", trCode);
 		} catch (SQLException ex) {
 			throw new TransactionException("DAO : Unable to rollback transaction", ex);
+		} finally {
+			try {
+				conn.setAutoCommit(true);
+				ConnectionPoolImpl.getInstance().returnConnection(conn);
+			} catch (SQLException | ConnectionPoolException ex) {
+				throw new TransactionException("DAO : Unable to return connection", ex);
+			}
 		}
-
 	}
 
 	/**

@@ -470,7 +470,7 @@ public class EnrollmentDAOdb implements EnrollmentDAO {
 	 */
 	@Override
 	public void completeStatuses(boolean isAdmitted, Enroll e, int trCode) throws DAOException {
-		LOGGER.debug("DAO : EnrollmentDAOdb.resetPassRates(transaction code = {})", trCode);
+		LOGGER.debug("DAO : EnrollmentDAOdb.completeStatuses(transaction code = {})", trCode);
 		ConnectionPool pool = null;
 		Connection conn = null;
 		try {
@@ -541,15 +541,22 @@ public class EnrollmentDAOdb implements EnrollmentDAO {
 	 */
 	@Override
 	public void rollbackTransaction(int trCode) throws TransactionException {
+		Connection conn = null;
 		try {
-			Connection conn = TR_MAP.get(trCode);
+			conn = TR_MAP.get(trCode);
 			conn.rollback();
 			TR_MAP.remove(trCode);
 			LOGGER.debug("DAO : transaction rollback; transaction code = {}", trCode);
 		} catch (SQLException ex) {
 			throw new TransactionException("DAO : Unable to rollback transaction", ex);
+		} finally {
+			try {
+				conn.setAutoCommit(true);
+				ConnectionPoolImpl.getInstance().returnConnection(conn);
+			} catch (SQLException | ConnectionPoolException ex) {
+				throw new TransactionException("DAO : Unable to return connection", ex);
+			}
 		}
-
 	}
 
 	/**

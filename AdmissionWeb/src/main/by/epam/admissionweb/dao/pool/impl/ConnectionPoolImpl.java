@@ -22,6 +22,9 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import main.by.epam.admissionweb.dao.pool.ConnectionPool;
 import main.by.epam.admissionweb.dao.pool.DBParameter;
 import main.by.epam.admissionweb.dao.pool.DBResourceManager;
@@ -51,6 +54,11 @@ import main.by.epam.admissionweb.dao.pool.exception.ConnectionPoolException;
  */
 public final class ConnectionPoolImpl implements ConnectionPool {
 
+	/**
+	 * Логгер
+	 */
+	
+	private static final Logger LOGGER = LogManager.getRootLogger();
 	/**
 	 * Имя свойства соединения с базой данных, ассоциированное с пользователем
 	 * базы данных
@@ -239,6 +247,7 @@ public final class ConnectionPoolImpl implements ConnectionPool {
 		try {
 			connection = poolConnections.take();
 			usedPoolConnections.add(connection);
+			LOGGER.debug("CONNECTION POOL : take connection (pool size = {})", poolConnections.size());
 		} catch (InterruptedException ex) {
 			throw new ConnectionPoolException("Unable to take connection from the pool", ex);
 		}
@@ -265,6 +274,7 @@ public final class ConnectionPoolImpl implements ConnectionPool {
 	public void returnConnection(Connection connection) throws ConnectionPoolException {
 		try {
 			connection.close();
+			LOGGER.debug("CONNECTION POOL : return connection (pool size = {})", poolConnections.size());
 		} catch (SQLException ex) {
 			throw new ConnectionPoolException("Unable to return connection to the connection pool", ex);
 		}
