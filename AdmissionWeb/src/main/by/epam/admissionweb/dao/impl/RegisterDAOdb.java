@@ -503,11 +503,9 @@ public class RegisterDAOdb implements RegisterDAO {
 		try {
 			pool = ConnectionPoolImpl.getInstance();
 			conn = TR_MAP.get(trCode);
-			LOGGER.debug("CONNECTION = {}", conn);
 			if (conn == null) {
 				conn = pool.takeConnection();
 			}
-			LOGGER.debug("CONNECTION = {}", conn);
 			PreparedStatement stat = conn.prepareStatement(DBHelper.FacultyQuery.SET_PASS_RATE);
 			stat.setInt(1, newPassRate);
 			stat.setInt(2, f.getId());
@@ -670,7 +668,6 @@ public class RegisterDAOdb implements RegisterDAO {
 			stat.setInt(2, e.getId());
 			ResultSet rs = stat.executeQuery();
 			while (rs.next()) {
-				LOGGER.debug("RN");
 				return rs.getInt(1);
 			}
 			return 0;

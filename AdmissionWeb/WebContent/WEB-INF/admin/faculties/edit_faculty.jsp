@@ -55,7 +55,6 @@
       <fmt:message key="i18n.info.admin.faculties.edit" bundle="${i18n}" />
     </p>
     <c:choose>
-
       <c:when test="${requestScope.successDeleted}">
         <p class="success-message">
           <fmt:message key="i18n.success.admin.faculties.delete" bundle="${i18n}" />

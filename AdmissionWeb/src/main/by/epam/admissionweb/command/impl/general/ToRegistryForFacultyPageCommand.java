@@ -17,9 +17,10 @@ import main.by.epam.admissionweb.service.ServiceFactory;
 import main.by.epam.admissionweb.service.exception.ServiceException;
 
 /**
- * Класс <code>ToRegistryForFacultyPageCommand</code> является реализацией интерфейса
- * {@link Command} и инкапсулирует поведение команды по обработке запроса на
- * перенаправление запроса абитуриента на страницу записи на факультет.
+ * Класс <code>ToRegistryForFacultyPageCommand</code> является реализацией
+ * интерфейса {@link Command} и инкапсулирует поведение команды по обработке
+ * запроса на перенаправление запроса абитуриента на страницу записи на
+ * факультет.
  * 
  * @author Daria Krupenko
  *
@@ -36,8 +37,8 @@ public class ToRegistryForFacultyPageCommand implements Command {
 	 * запроса абитуриента на страницу записи на факультет.
 	 * <p>
 	 * Метод обращается к сервису {@link RegisterService} для получения сведений
-	 * о статусе абитуриента в учебном заведении, а также о состоянии набора в целом,
-	 * чтобы установить соответствующие атрибуты в контекст запроса.
+	 * о статусе абитуриента в учебном заведении, а также о состоянии набора в
+	 * целом, чтобы установить соответствующие атрибуты в контекст запроса.
 	 * 
 	 * @param request
 	 *            контекст запроса (используется для получение доступа к
@@ -72,12 +73,16 @@ public class ToRegistryForFacultyPageCommand implements Command {
 							request.setAttribute(CommandHelper.AttributeName.REGISTERED, true);
 						} else {
 							int id = helper.parseId(request.getParameter(CommandHelper.ParameterName.FACULTY_ID));
-							FacultyService fService = ServiceFactory.getInstance().getFacultyService();
-							Faculty f = fService.getFaculty(id);
-							if (f != null) {
-								request.setAttribute(CommandHelper.AttributeName.FACULTY, f);
+							if (id == 0) {
+								request.setAttribute(CommandHelper.AttributeName.NOT_FOUND, true);
 							} else {
-								request.setAttribute(CommandHelper.AttributeName.ERROR, true);
+								FacultyService fService = ServiceFactory.getInstance().getFacultyService();
+								Faculty f = fService.getFaculty(id);
+								if (f != null) {
+									request.setAttribute(CommandHelper.AttributeName.FACULTY, f);
+								} else {
+									request.setAttribute(CommandHelper.AttributeName.ERROR, true);
+								}
 							}
 						}
 					}

@@ -83,6 +83,7 @@ public class GetRegisterByStatusCommand implements Command {
 			path = CommandHelper.PageName.ADMIN_LOGIN;
 		} else {
 			try {
+				boolean isAdmitted = helper.parseStatus(request.getParameter(CommandHelper.ParameterName.STATUS));
 				int currentPage = helper
 						.parseCurrentPage(request.getParameter(CommandHelper.ParameterName.CURRENT_PAGE));
 				boolean next = helper.parseDirection(request.getParameter(CommandHelper.ParameterName.DIRECTION));
@@ -93,7 +94,6 @@ public class GetRegisterByStatusCommand implements Command {
 				Faculty f = ServiceFactory.getInstance().getFacultyService().getFaculty(fId);
 				request.setAttribute(CommandHelper.AttributeName.FACULTY, f);
 				if (f != null) {
-					boolean isAdmitted = helper.parseStatus(request.getParameter(CommandHelper.ParameterName.STATUS));
 					LOGGER.debug("COMMAND : GetRegisterByStatusCommand (admitted = {})", isAdmitted);
 					RegisterService service = ServiceFactory.getInstance().getRegisterService();
 					int recordsNumber = service.getRecordsNumberByStatusAndFaculty(isAdmitted, f);
@@ -106,10 +106,10 @@ public class GetRegisterByStatusCommand implements Command {
 					request.setAttribute(CommandHelper.AttributeName.PAGE, requiredPage);
 					request.setAttribute(CommandHelper.AttributeName.PAGES_NUMBER, pagesNumber);
 					request.setAttribute(CommandHelper.AttributeName.LIST, list);
-					request.setAttribute(CommandHelper.AttributeName.STATUS, isAdmitted);
 				} else {
-					request.setAttribute(CommandHelper.AttributeName.ERROR, true);
+					request.setAttribute(CommandHelper.AttributeName.NOT_FOUND, true);
 				}
+				request.setAttribute(CommandHelper.AttributeName.STATUS, isAdmitted);
 			} catch (ServiceException ex) {
 				LOGGER.error(ex);
 				request.setAttribute(CommandHelper.AttributeName.ERROR, true);

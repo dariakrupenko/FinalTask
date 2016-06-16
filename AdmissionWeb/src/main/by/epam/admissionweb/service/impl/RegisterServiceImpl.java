@@ -202,19 +202,23 @@ public class RegisterServiceImpl implements RegisterService {
 				trCode = dao.beginTransaction();
 				dao.deleteRecord(a, trCode);
 				recalculateRegister(a.getRecord().getFaculty(), a.getRecord().getEnroll(), trCode);
-				newA = DAOFactory.getInstance().getApplicantDAO().getApplicant(a.getId(), trCode);
-				if (newA == null) {
-					throw new ServiceException("SERVICE : Unable to get applicant after deleting his record", null);
-				}
 				dao.commitTransaction(trCode);
-				LOGGER.debug("SERVICE : RegisterServiceImpl.cancelRegistry (newA = {})", newA);
-				return newA;
 			} catch (DAOException ex) {
 				try {
 					dao.rollbackTransaction(trCode);
 				} catch (TransactionException ex1) {
 					throw new ServiceException("SERVICE : Unable to cancel registry (transaction)", ex1);
 				}
+				throw new ServiceException("SERVICE : Unable to cancel registry", ex);
+			}
+			try {
+				newA = DAOFactory.getInstance().getApplicantDAO().getApplicant(a.getId(), ServiceHelper.NO_TRANSACTION);
+				if (newA == null) {
+					throw new ServiceException("SERVICE : Unable to get applicant after deleting his record", null);
+				}
+				LOGGER.debug("SERVICE : RegisterServiceImpl.cancelRegistry (newA = {})", newA);
+				return newA;
+			} catch (DAOException ex) {
 				throw new ServiceException("SERVICE : Unable to cancel registry", ex);
 			}
 		} else {
@@ -320,25 +324,26 @@ public class RegisterServiceImpl implements RegisterService {
 		LOGGER.debug("SERVICE : RegisterServiceImpl.recalculateRegister()");
 		DAOFactory factory = DAOFactory.getInstance();
 		RegisterDAO dao = factory.getRegisterDAO();
+		int innerTrCode = trCode;
 		try {
 			if (trCode == ServiceHelper.NO_TRANSACTION) {
-				trCode = dao.beginTransaction();
+				innerTrCode = dao.beginTransaction();
 			}
-			dao.updateStatuses(true, f, e, trCode);
-			dao.updateStatuses(false, f, e, trCode);
-			int newPassRate = dao.getChangedPassRate(f, trCode);
-			int rNumber = dao.getRecordsNumberByFaculty(f, e, trCode);
+			dao.updateStatuses(true, f, e, innerTrCode);
+			dao.updateStatuses(false, f, e, innerTrCode);
+			int newPassRate = dao.getChangedPassRate(f, innerTrCode);
+			int rNumber = dao.getRecordsNumberByFaculty(f, e, innerTrCode);
 			if (rNumber >= f.getPlan()) {
-				dao.setNewPassRate(f, newPassRate, trCode);
+				dao.setNewPassRate(f, newPassRate, innerTrCode);
 			} else {
-				dao.setNewPassRate(f, 0, trCode);
+				dao.setNewPassRate(f, 0, innerTrCode);
 			}
 			if (trCode == ServiceHelper.NO_TRANSACTION) {
-				dao.commitTransaction(trCode);
+				dao.commitTransaction(innerTrCode);
 			}
 		} catch (DAOException ex) {
 			try {
-				dao.rollbackTransaction(trCode);
+				dao.rollbackTransaction(innerTrCode);
 			} catch (TransactionException ex1) {
 				throw new ServiceException("SERVICE : Unable to recalculate (transaction)", ex1);
 			}

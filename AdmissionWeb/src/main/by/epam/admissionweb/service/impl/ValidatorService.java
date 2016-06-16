@@ -3,6 +3,8 @@ package main.by.epam.admissionweb.service.impl;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -258,13 +260,12 @@ class ValidatorService {
 		if (email == null || email.isEmpty()) {
 			return false;
 		}
-		if (email.contains(" ") || !email.contains("@")) {
-			return false;
-		}
 		if (email.length() < minLength || email.length() > maxLength) {
 			return false;
 		}
-		return true;
+		Pattern pattern = Pattern.compile(Constraints.EMAIL_PATTERN, Pattern.CASE_INSENSITIVE);
+		Matcher matcher = pattern.matcher(email);
+		return matcher.matches();
 	}
 
 	/**
@@ -446,6 +447,8 @@ class ValidatorService {
 
 		private static final int SCORE_MIN = 0;
 		private static final int SCORE_MAX = 100;
+
+		private static final String EMAIL_PATTERN = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
 	}
 
 }

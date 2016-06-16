@@ -89,7 +89,7 @@ public class LoginAdminCommand implements Command {
 			String password = request.getParameter(CommandHelper.ParameterName.PASSWORD);
 			LOGGER.debug("COMMAND : LoginAdminCommand (login = {}, pw = {})", login, password);
 			HttpSession session = request.getSession(true);
-			if (login.equals(adminLogin) && password.equals(adminPassword)) {
+			if (adminLogin.equals(login) && adminPassword.equals(password)) {
 				session.invalidate();
 				session = request.getSession(true);
 				session.setAttribute(CommandHelper.AttributeName.ADMIN, true);

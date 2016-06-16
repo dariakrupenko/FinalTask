@@ -80,10 +80,8 @@ public class RegistryForFacultyCommand implements Command {
 					}
 					int fId = helper.parseId(request.getParameter(CommandHelper.ParameterName.FACULTY_ID));
 					Faculty f = ServiceFactory.getInstance().getFacultyService().getFaculty(fId);
-
-					LOGGER.debug("f = {}", f);
 					Map<Discipline, Integer> scores = helper.parseScores(request);
-					int certScore = Integer.parseInt(request.getParameter(CommandHelper.ParameterName.CERTIFICATE));
+					int certScore = helper.parseCertificate(request.getParameter(CommandHelper.ParameterName.CERTIFICATE));
 					RegisterRecord r = helper.constructRecord(a, f, scores, certScore, 0, null);
 					LOGGER.debug("COMMAND : RegistryForFacultyCommand (r = {})", r);
 					RegisterService service = ServiceFactory.getInstance().getRegisterService();
@@ -111,5 +109,4 @@ public class RegistryForFacultyCommand implements Command {
 		}
 	}
 
-	
 }

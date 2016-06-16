@@ -281,7 +281,9 @@ ul input {
  background: transparent;
  border: none;
  color: #e6ffee;
- padding: 0px;
+ padding: 10px;
+ width: 100%;
+ margin: -10px;
 }
 
 /* tables style */
@@ -317,6 +319,10 @@ td {
 table input {
  background: transparent;
  border: none;
+}
+
+table input:hover {
+ color: white;
 }
 
 /* messages */
@@ -372,6 +378,11 @@ table input {
 
 .main-panel .title {
  font-size: 2em;
+}
+
+.main-panel .title:hover {
+ color: #006666;
+ border-bottom: #006666 solid 1px;
 }
 
 .main-panel p {

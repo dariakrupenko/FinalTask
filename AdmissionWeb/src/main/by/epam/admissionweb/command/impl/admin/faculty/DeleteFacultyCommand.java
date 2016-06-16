@@ -70,18 +70,22 @@ public class DeleteFacultyCommand implements Command {
 			String idStr = request.getParameter(CommandHelper.ParameterName.FACULTY_ID);
 			int id = helper.parseId(idStr);
 			LOGGER.debug("COMMAND : DeleteFacultyCommand (id = {})", id);
-			try {
-				FacultyService service = ServiceFactory.getInstance().getFacultyService();
-				boolean isDeleteEnable = service.isDeleteEnable();
-				if (!isDeleteEnable) {
-					request.setAttribute(CommandHelper.AttributeName.DELETE_UNABLE, true);
-				} else {
-					service.deleteFaculty(id);
-					request.setAttribute(CommandHelper.AttributeName.SUCCESS_DELETED, true);
+			if (id == 0) {
+				request.setAttribute(CommandHelper.AttributeName.NOT_FOUND, true);
+			} else {
+				try {
+					FacultyService service = ServiceFactory.getInstance().getFacultyService();
+					boolean isDeleteEnable = service.isDeleteEnable();
+					if (!isDeleteEnable) {
+						request.setAttribute(CommandHelper.AttributeName.DELETE_UNABLE, true);
+					} else {
+						service.deleteFaculty(id);
+						request.setAttribute(CommandHelper.AttributeName.SUCCESS_DELETED, true);
+					}
+				} catch (ServiceException ex) {
+					LOGGER.error(ex);
+					request.setAttribute(CommandHelper.AttributeName.ERROR, true);
 				}
-			} catch (ServiceException ex) {
-				LOGGER.error(ex);
-				request.setAttribute(CommandHelper.AttributeName.ERROR, true);
 			}
 			path = CommandHelper.PageName.EDIT_FACULTY;
 		}

@@ -26,6 +26,11 @@
     </div>
     <h2>${requestScope.faculty.title}</h2>
     <c:choose>
+      <c:when test="${requestScope.notFound}">
+        <p class="info-message">
+          <fmt:message key="i18n.error.faculty.not_found" bundle="${i18n}" />
+        </p>
+      </c:when>
       <c:when test="${requestScope.successRegistered}">
         <p class="success-message">
           <fmt:message key="i18n.success.applicant.registry" bundle="${i18n}" />

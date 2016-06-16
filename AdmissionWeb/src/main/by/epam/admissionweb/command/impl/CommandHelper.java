@@ -79,7 +79,7 @@ public class CommandHelper {
 	 * странице
 	 */
 	public static final int ELEMENTS_MAX_VALUE = Integer.MAX_VALUE;
-	
+
 	/**
 	 * Часть значения параметра запроса (используется при извлечении баллов
 	 * абитуриента по дисциплинам)
@@ -273,7 +273,11 @@ public class CommandHelper {
 		Date date = null;
 		try {
 			SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
-			return format.parse(str);
+			if (str != null) {
+				return format.parse(str);
+			} else {
+				return date;
+			}
 		} catch (ParseException ex) {
 			LOGGER.error("COMMAND HELPER : invalid date parameter format", ex);
 			date = null;
@@ -296,6 +300,25 @@ public class CommandHelper {
 			return Integer.parseInt(planStr);
 		} catch (NumberFormatException ex) {
 			LOGGER.error("COMMAND HELPER : invalid plan parameter format", ex);
+			return -1;
+		}
+	}
+	
+	/**
+	 * Преобразование балла сертификата в формате строки (параметр
+	 * <code>certStr</code>) в тип данных int
+	 * 
+	 * @param certStr
+	 *            балл сертификата в формате строки
+	 * @return балл сертификата в формате типа данных int или -1, если
+	 *         <code>certStr</code> имеет неверный формат или равен
+	 *         <code>null</code>
+	 */
+	public int parseCertificate(String certStr) {
+		try {
+			return Integer.parseInt(certStr);
+		} catch (NumberFormatException ex) {
+			LOGGER.error("COMMAND HELPER : invalid certificate score parameter format", ex);
 			return -1;
 		}
 	}
@@ -477,7 +500,7 @@ public class CommandHelper {
 		f.setDisciplines(disciplines);
 		return f;
 	}
-	
+
 	/**
 	 * Конструирование объекта набора
 	 * 
@@ -522,7 +545,7 @@ public class CommandHelper {
 			return -1;
 		}
 	}
-	
+
 	/**
 	 * Конструирует объект записи ведомости
 	 * 
